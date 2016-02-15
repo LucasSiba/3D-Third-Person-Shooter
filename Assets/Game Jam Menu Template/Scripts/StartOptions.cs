@@ -61,7 +61,12 @@ public class StartOptions : MonoBehaviour {
 			//Call the StartGameInScene function to start game without loading a new scene.
 			StartGameInScene();
 		}
+	}
 
+	public void RamboButtonClicked()
+	{
+		// Set Global Rambo = True
+		StartButtonClicked();
 	}
 
 //	//Once the level has loaded, check if we want to call PlayLevelMusic
