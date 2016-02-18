@@ -11,10 +11,8 @@ namespace CompleteProject
 		public static bool RamboMode = false;
 		public int ramboscorelimit;
 		public GameObject ramboMessage;
-
 		public GameObject backgroundMusic;
-		public GameObject ramboMusic;
-
+		public AudioClip  rambobackgroundMusic;
         Text text;                      // Reference to the Text component.
 
         void Awake ()
@@ -31,7 +29,7 @@ namespace CompleteProject
 
         void Update ()
         {
-			if (score >= ramboscorelimit) {
+			if (RamboMode == false && score >= ramboscorelimit) {
 				RamboMode = true;
 				text.color = Color.red;
 				ramboMessage.SetActive (true);
@@ -41,9 +39,8 @@ namespace CompleteProject
 
 				AudioSource backgroundAs = backgroundMusic.GetComponent <AudioSource> ();
 				backgroundAs.Stop ();
-
-				AudioSource ramboAs = ramboMusic.GetComponent <AudioSource> ();
-				ramboAs.Play ();
+				backgroundAs.clip = rambobackgroundMusic;
+				backgroundAs.Play ();
 			}
 
 			if (RamboMode == true) {
