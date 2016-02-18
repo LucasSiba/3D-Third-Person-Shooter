@@ -4,10 +4,10 @@ namespace CompleteProject
 {
     public class EnemyHealth : MonoBehaviour
     {
-        public int startingHealth = 100;            // The amount of health the enemy starts the game with.
+        public int startingHealth = 1;            // The amount of health the enemy starts the game with.
         public int currentHealth;                   // The current health the enemy has.
         public float sinkSpeed = 2.5f;              // The speed at which the enemy sinks through the floor when dead.
-        public int scoreValue = 10;                 // The amount added to the player's score when the enemy dies.
+        public int scoreValue = 100;                 // The amount added to the player's score when the enemy dies.
         public AudioClip deathClip;                 // The sound to play when the enemy dies.
 
 
@@ -19,6 +19,7 @@ namespace CompleteProject
         bool isSinking;                             // Whether the enemy has started sinking through the floor.
 
 
+
         void Awake ()
         {
             // Setting up the references.
@@ -26,6 +27,7 @@ namespace CompleteProject
             enemyAudio = GetComponent <AudioSource> ();
             hitParticles = GetComponentInChildren <ParticleSystem> ();
             capsuleCollider = GetComponent <CapsuleCollider> ();
+
 
             // Setting the current health when the enemy first spawns.
             currentHealth = startingHealth;
@@ -66,7 +68,24 @@ namespace CompleteProject
             if(currentHealth <= 0)
             {
                 // ... the enemy is dead.
-                Death ();
+				//GameObject go = GetComponent <GameObject> ();
+				//go.SetActive (false);
+                
+				Rigidbody rb = GetComponent <Rigidbody> ();
+				Vector3 force = new Vector3(100.0f, 0.0f, 100.0f);
+				rb.AddForce(force);
+
+				//Collider[] colliders = Physics.OverlapSphere(hitPoint, 100);
+				//foreach (Collider c in colliders) {
+				//	Rigidbody rb = c.GetComponent<Rigidbody>();
+				//	if (rb != null) {
+				//		GameObject go = c.GetComponent<GameObject>();
+				//		go.SetActive (false);
+				//		rb.AddExplosionForce (400, hitPoint, 100, 0, ForceMode.Impulse);
+				//	}
+				//}
+
+				Death ();
             }
         }
 
