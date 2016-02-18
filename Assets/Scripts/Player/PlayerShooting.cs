@@ -8,7 +8,6 @@ public class PlayerShooting : MonoBehaviour
 
 
     float timer;
-    Ray shootRay;
     RaycastHit shootHit;
     int shootableMask;
     ParticleSystem gunParticles;
@@ -65,6 +64,7 @@ public class PlayerShooting : MonoBehaviour
         gunLine.enabled = true;
         gunLine.SetPosition (0, transform.position);
 
+		Ray shootRay = new Ray ();
         shootRay.origin = transform.position;
         shootRay.direction = transform.forward;
 

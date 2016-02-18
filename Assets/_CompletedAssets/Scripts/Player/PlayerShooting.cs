@@ -11,7 +11,6 @@ namespace CompleteProject
 
 
         float timer;                                    // A timer to determine when to fire.
-        Ray shootRay;                                   // A ray from the gun end forwards.
         RaycastHit shootHit;                            // A raycast hit to get information about what was hit.
         int shootableMask;                              // A layer mask so the raycast only hits things on the shootable layer.
         ParticleSystem gunParticles;                    // Reference to the particle system.
@@ -95,6 +94,7 @@ namespace CompleteProject
             gunLine.SetPosition (0, transform.position);
 
             // Set the shootRay so that it starts at the end of the gun and points forward from the barrel.
+			Ray shootRay = new Ray();                                   // A ray from the gun end forwards.
             shootRay.origin = transform.position;
             shootRay.direction = transform.forward;
 

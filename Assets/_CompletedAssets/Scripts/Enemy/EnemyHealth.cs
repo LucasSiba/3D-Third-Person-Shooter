@@ -9,12 +9,14 @@ namespace CompleteProject
         public float sinkSpeed = 2.5f;              // The speed at which the enemy sinks through the floor when dead.
         public int scoreValue = 100;                 // The amount added to the player's score when the enemy dies.
         public AudioClip deathClip;                 // The sound to play when the enemy dies.
+		public static int explosionForce = 0;
 
 
         Animator anim;                              // Reference to the animator.
         AudioSource enemyAudio;                     // Reference to the audio source.
         ParticleSystem hitParticles;                // Reference to the particle system that plays when the enemy is damaged.
         CapsuleCollider capsuleCollider;            // Reference to the capsule collider.
+		Rigidbody rb;
         bool isDead;                                // Whether the enemy is dead.
         bool isSinking;                             // Whether the enemy has started sinking through the floor.
 
@@ -27,7 +29,7 @@ namespace CompleteProject
             enemyAudio = GetComponent <AudioSource> ();
             hitParticles = GetComponentInChildren <ParticleSystem> ();
             capsuleCollider = GetComponent <CapsuleCollider> ();
-
+			rb = GetComponent <Rigidbody> ();
 
             // Setting the current health when the enemy first spawns.
             currentHealth = startingHealth;
@@ -64,17 +66,21 @@ namespace CompleteProject
             // And play the particles.
             hitParticles.Play();
 
+			rb.AddExplosionForce (explosionForce, hitPoint, 0, 0, ForceMode.Force);
+
             // If the current health is less than or equal to zero...
             if(currentHealth <= 0)
             {
-                // ... the enemy is dead.
+				
+                
+			// ... the enemy is dead.
 				//GameObject go = GetComponent <GameObject> ();
 				//go.SetActive (false);
                 
-				Rigidbody rb = GetComponent <Rigidbody> ();
-				Vector3 force = new Vector3(100.0f, 0.0f, 100.0f);
-				rb.AddForce(force);
-
+//				Rigidbody rb = GetComponent <Rigidbody> ();
+//				Vector3 force = new Vector3(100.0f, 0.0f, 100.0f);
+//				rb.AddForce(force);
+//
 				//Collider[] colliders = Physics.OverlapSphere(hitPoint, 100);
 				//foreach (Collider c in colliders) {
 				//	Rigidbody rb = c.GetComponent<Rigidbody>();

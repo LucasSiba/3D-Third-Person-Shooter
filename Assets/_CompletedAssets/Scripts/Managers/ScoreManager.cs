@@ -8,13 +8,14 @@ namespace CompleteProject
     {
 		
         public static int score;        // The player's score.
+		public static bool RamboMode = false;
 		public int ramboscorelimit;
 		public GameObject ramboMessage;
 
-		public static bool RamboMode = false;
+		public GameObject backgroundMusic;
+		public GameObject ramboMusic;
 
         Text text;                      // Reference to the Text component.
-
 
         void Awake ()
         {
@@ -35,7 +36,14 @@ namespace CompleteProject
 				text.color = Color.red;
 				ramboMessage.SetActive (true);
 				PlayerShooting.damagePerShot = 25;
-				PlayerShooting.timeBetweenBullets = 0.08f; 
+				PlayerShooting.timeBetweenBullets = 0.08f;
+				EnemyHealth.explosionForce = 500;
+
+				AudioSource backgroundAs = backgroundMusic.GetComponent <AudioSource> ();
+				backgroundAs.Stop ();
+
+				AudioSource ramboAs = ramboMusic.GetComponent <AudioSource> ();
+				ramboAs.Play ();
 			}
 
 			if (RamboMode == true) {
